@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  description: Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule ad reward scoring. This API can be used by the client to handle exception cases with rebate processing or reward scoring. Set-up may be required on a separate reward module, please consult your Mastercard Loyalty Solutions Account Manager before using this API. This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN).
+  version: "1.0"
+  title: Mastercard Rebates API
+  termsOfService: https://developer.mastercard.com/terms-of-use
+  contact:
+    name: Mastercard Developer Zone
+    url: https://stage.developer.mastercard.com
+    email: apisupport@mastercard.com
+  license:
+    name: Mastercard Developer Zone Support
+    url: https://developer.mastercard.com/support
+tags:
+  - name: Rebate Transaction
+    description: Rebate Transaction Operations
+servers:
+  - url: https://api.mastercard.com/loyalty/rewards/rebates
+paths:
+  /rebate-transactions:
+    post:
+      tags:
+        - Rebate Transaction
+      summary: This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN).
+      operationId: createRebateTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RebateTransactionRequestList"
+        description: rebateTransactionRequestList
+        required: true
+      responses:
+        "201":
+          description: Successfully Created Rebate Transaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RebateTransactionResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errors"
+      deprecated: false
+components:
+  schemas:
+    RebateTransactionRequestList:
+      type: object
+      properties:
+        rebateTransactionRequestList:
+          type: array
+          items:
+            $ref: "#/components/schemas/RebateTransactionRequest"
+      title: RebateTransactionRequestList
+    RebateTransactionRequest:
+      type: object
+      required:
+        - memberIca
+        - merchantCategoryCode
+        - merchantId
+        - rebateAmount
+        - rebateReversalIndicator
+        - rebateSourceCode
+        - transactionDescription
+        - transactionSequenceNumber
+      properties:
+        accountIdentifier:
+          type: string
+          example: 65203356
+          maxLength: 30
+          description: An identifier that uniquely identifies the account enrolled into mastercard rewards. One of the supported account identifiers may be used. While using account identifier for processing, devicePrimaryAccountNumber is not required.
+        devicePrimaryAccountNumber:
+          type: string
+          example: 5100120000000004
+          maxLength: 30
+          description: An unique identifier assigned to an account number used for rebate processing. The account number assigned to this identifier may or may not enrolled into mastecard rewards. While using devicePrimaryAccountNumber for processing, account identifier is not required.
+        memberIca:
+          type: string
+          example: 47441
+          maxLength: 11
+          description: Mastercard assigned unique identifier for a client.
+        merchantCategoryCode:
+          type: string
+          example: 6555
+          description: Mastercard merchant category code required for the processing of rebates. Usually 6555, Mastercard Rewards is used.
+        merchantId:
+          type: string
+          example: 16555
+          maxLength: 15
+          description: Merchant ID required for the rebate settlement process.
+        rebateAmount:
+          type: string
+          example: 13.12
+          description: The value of the rebate requested to be processed for the specified account.
+        rebateReversalIndicator:
+          type: string
+          example: N
+          description: Indicates whether the transaction is credit or reversal of credit transaction. - Y means reversal and N means credit.
+        rebateSourceCode:
+          type: string
+          example: ext1
+          maxLength: 20
+          description: Unique identifier assigned by mastercard at the time of onboarding to capture processing information required for rebate settlement by clearing house.
+        transactionAmount:
+          type: string
+          example: 100.01
+          maxLength: 14
+          description: The payment transaction amount of the purchase.
+        transactionDate:
+          type: string
+          example: 2019-08-01
+          description: The purchase transaction date.
+        transactionDescription:
+          type: string
+          example: CreditRebate
+          maxLength: 22
+          description: This is the transaction description that will appear on a cardholder’s account statement.
+        transactionSequenceNumber:
+          type: string
+          example: 1112312
+          maxLength: 13
+          description: Unique identifier assigned to each cardholder transaction by the Merchant.
+      title: RebateTransactionRequest
+    RebateTransactionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+      title: RebateTransactionResponse
+    Errors:
+      type: object
+      required:
+        - Errors
+      properties:
+        Errors:
+          $ref: "#/components/schemas/ErrorList"
+      title: Errors
+    ErrorList:
+      type: object
+      required:
+        - Error
+      properties:
+        Error:
+          type: array
+          items:
+            $ref: "#/components/schemas/Error"
+      title: ErrorList
+    Error:
+      type: object
+      properties:
+        Description:
+          type: string
+          example: Member ICA should be numeric and less than or equal to 11 digit.
+          description: Short description of the ReasonCode field.
+        Details:
+          type: string
+          example: null
+          description: Where appropriate, indicates detailed information about data received.
+        ReasonCode:
+          type: string
+          example: INVALID_FORMAT
+          description: A unique constant identifying the error case encountered during transaction processing.
+        Recoverable:
+          type: boolean
+          example: false
+          description: Indicates whether this error will always be returned for this request, or retrying could change the outcome.
+        Source:
+          type: string
+          example: MRS
+          description: Source of the error
+      title: Error
