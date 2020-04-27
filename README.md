@@ -20,7 +20,7 @@
 - [License](#license)
 
 ## Overview <a name="overview"></a>
-Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule ad reward scoring. 
+Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule and reward scoring. 
 This API can be used by the client to handle exception cases with rebate processing or reward scoring. Please see here for more details on the API: [Mastercard Developers](https://developer.mastercard.com/mastercard-rebates/documentation/).
 
 ### Compatibility <a name="compatibility"></a>
@@ -114,7 +114,7 @@ Once you’ve added the correct properties, we can build the application. We can
 
 When the project builds successfully you can then run the following command to start the project
 
-`java -jar target/rewards-rebate-reference-1.0.0.jar`
+`java -jar target/mastercard-rebates-reference-1.0.0.jar`
 
 ## Use Cases <a name="use-cases"></a>
 > Case 1: **CREATE REBATE TRANSACTION**

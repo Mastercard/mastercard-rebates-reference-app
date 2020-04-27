@@ -15,7 +15,6 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
 import org.openapitools.client.model.Error;
 import org.openapitools.client.model.RebateTransactionResponse;
-import org.springframework.http.HttpStatus;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -54,7 +53,7 @@ class RebateTransactionServiceImplTest {
 
     @Test
     void testCreate() throws Exception {
-        when(apiClient.execute(any(Call.class), any(Type.class))).thenReturn(new ApiResponse<>(HttpStatus.CREATED.value(), new HashMap<>(), getRebateTransactionResponse()));
+        when(apiClient.execute(any(Call.class), any(Type.class))).thenReturn(new ApiResponse<>(201, new HashMap<>(), getRebateTransactionResponse()));
 
         RebateTransactionResponse rebateTransactionResponse = rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList());
 
