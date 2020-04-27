@@ -1,6 +1,6 @@
 # Mastercard Rebates Reference Implementation
 
-[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Mastercard/mastercard-rewards-rebate-reference/blob/master/LICENSE)
+[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Mastercard/mastercard-rebates-reference/blob/master/LICENSE)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -21,7 +21,7 @@
 
 ## Overview <a name="overview"></a>
 Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule ad reward scoring. 
-This API can be used by the client to handle exception cases with rebate processing or reward scoring. Please see here for more details on the API: [Mastercard Developers](https://developer.mastercard.com/rewards-rebate/documentation/).
+This API can be used by the client to handle exception cases with rebate processing or reward scoring. Please see here for more details on the API: [Mastercard Developers](https://developer.mastercard.com/mastercard-rebates/documentation/).
 
 ### Compatibility <a name="compatibility"></a>
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or later
@@ -79,7 +79,7 @@ See also:
                 <goal>generate</goal>
             </goals>
             <configuration>
-                <inputSpec>${project.basedir}/src/main/resources/Rewards_Rebate-api-spec.yaml</inputSpec>
+                <inputSpec>${project.basedir}/src/main/resources/Mastercard_Rebates-api-spec.yaml</inputSpec>
                 <generatorName>java</generatorName>
                 <library>okhttp-gson</library>
                 <generateApiTests>false</generateApiTests>
@@ -128,7 +128,7 @@ When the project builds successfully you can then run the following command to s
 > Case 2: **ERROR HANDLING**
   - The operation can fail for various reasons like formatting, field length exceeds, etc.
   - This use case just shows one of the example of such failures.
-  - For the complete list of application specific error codes, refer to [Application Error Codes](https://developer.mastercard.com/rewards-rebate/documentation/api-reference/application-error-codes/).
+  - For the complete list of application specific error codes, refer to [Application Error Codes](https://developer.mastercard.com/mastercard-rebates/documentation/api-reference/application-error-codes/).
   - Also refer to model class [Errors](docs/Errors.md) for field level information.
   
 ## API Reference <a name="api-reference"></a>
@@ -136,7 +136,7 @@ To develop a client application that consumes a RESTful Rebates API with Spring 
 
 | API | Endpoint | HTTP Method | Description |
 | :-- | :------- | :---------- | :---------- |
-| [Create Rebate Transaction](https://developer.mastercard.com/rewards-rebate/documentation/api-reference/#apis) | `/rebate-transactions` | POST | This send rebate requests for processing the accounts which may or may not be enrolled into rewards program. |
+| [Create Rebate Transaction](https://developer.mastercard.com/mastercard-rebates/documentation/api-reference/#apis) | `/rebate-transactions` | POST | This send rebate requests for processing the accounts which may or may not be enrolled into rewards program. |
 
 ### Authorization <a name="authorization"></a>
 The `com.mastercard.developer.interceptors` package will provide you with some request interceptor classes you can use when configuring your API client. These classes will take care of adding the correct `Authorization` header before sending the request.
