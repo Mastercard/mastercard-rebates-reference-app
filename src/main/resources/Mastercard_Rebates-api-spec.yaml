@@ -68,31 +68,31 @@ components:
       properties:
         accountIdentifier:
           type: string
-          example: 65203356
+          example: "65203356"
           maxLength: 30
           description: An identifier that uniquely identifies the account enrolled into mastercard rewards. One of the supported account identifiers may be used. While using account identifier for processing, devicePrimaryAccountNumber is not required.
         devicePrimaryAccountNumber:
           type: string
-          example: 5100120000000004
+          example: ""
           maxLength: 30
           description: An unique identifier assigned to an account number used for rebate processing. The account number assigned to this identifier may or may not enrolled into mastecard rewards. While using devicePrimaryAccountNumber for processing, account identifier is not required.
         memberIca:
           type: string
-          example: 47441
+          example: "47441"
           maxLength: 11
           description: Mastercard assigned unique identifier for a client.
         merchantCategoryCode:
           type: string
-          example: 6555
+          example: "6555"
           description: Mastercard merchant category code required for the processing of rebates. Usually 6555, Mastercard Rewards is used.
         merchantId:
           type: string
-          example: 16555
+          example: "6555"
           maxLength: 15
           description: Merchant ID required for the rebate settlement process.
         rebateAmount:
           type: string
-          example: 13.12
+          example: "50"
           description: The value of the rebate requested to be processed for the specified account.
         rebateReversalIndicator:
           type: string
@@ -101,25 +101,25 @@ components:
         rebateSourceCode:
           type: string
           example: ext1
-          maxLength: 20
+          maxLength: "20"
           description: Unique identifier assigned by mastercard at the time of onboarding to capture processing information required for rebate settlement by clearing house.
         transactionAmount:
           type: string
-          example: 100.01
+          example: "100"
           maxLength: 14
           description: The payment transaction amount of the purchase.
         transactionDate:
           type: string
-          example: 2019-08-01
+          example: "2019-08-01"
           description: The purchase transaction date.
         transactionDescription:
           type: string
-          example: CreditRebate
-          maxLength: 22
+          example: Rebate
+          maxLength: "22"
           description: This is the transaction description that will appear on a cardholder’s account statement.
         transactionSequenceNumber:
           type: string
-          example: 1112312
+          example: "11123"
           maxLength: 13
           description: Unique identifier assigned to each cardholder transaction by the Merchant.
       title: RebateTransactionRequest
@@ -128,6 +128,7 @@ components:
       properties:
         status:
           type: string
+          example: "OK"
       title: RebateTransactionResponse
     Errors:
       type: object
@@ -150,24 +151,24 @@ components:
     Error:
       type: object
       properties:
-        Description:
+        Source:
           type: string
-          example: Member ICA should be numeric and less than or equal to 11 digit.
-          description: Short description of the ReasonCode field.
-        Details:
-          type: string
-          example: null
-          description: Where appropriate, indicates detailed information about data received.
+          example: "MRS"
+          description: Source of the error
         ReasonCode:
           type: string
-          example: INVALID_FORMAT
+          example: "INVALID_FORMAT"
           description: A unique constant identifying the error case encountered during transaction processing.
+        Description:
+          type: string
+          example: "Member ICA should be numeric and less than or equal to 11 digit."
+          description: Short description of the ReasonCode field.
         Recoverable:
           type: boolean
           example: false
           description: Indicates whether this error will always be returned for this request, or retrying could change the outcome.
-        Source:
+        Details:
           type: string
-          example: MRS
-          description: Source of the error
+          example: null
+          description: Where appropriate, indicates detailed information about data received.
       title: Error
