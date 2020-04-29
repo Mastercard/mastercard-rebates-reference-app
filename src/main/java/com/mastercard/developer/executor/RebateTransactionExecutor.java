@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.mastercard.developer.example.RebateTransactionExample.getRebateTransactionRequestForAccountIdentifier;
+import static com.mastercard.developer.example.RebateTransactionExample.getRebateTransactionRequestForDPAN;
+
 /**
  * This is demo executor class to represent how the Rebate Transaction operations can be perform.
  * You can have your own implementation logic to call Rebate Transaction API.
@@ -33,7 +36,9 @@ public class RebateTransactionExecutor {
     public void execute() throws ServiceException {
         log.info("<<<---- REBATE TRANSACTION API EXECUTION STARTED ---->>>");
 
-        createRebateTransactions();
+        createRebateTransactionsForAccountIdentifier();
+
+        createRebateTransactionsForDPAN();
 
         errorHandling();
 
@@ -41,13 +46,23 @@ public class RebateTransactionExecutor {
     }
 
     /**
-     * USE CASE 1: CREATE REBATE TRANSACTION
-     * It will create rebate transaction into Mastercard Rewards Platform
+     * USE CASE 1: REBATE WITH ACCOUNT IDENTIFIER
+     * It will create rebate transaction for Account Identifier into Mastercard Rewards Platform
      *
      * @return An instance of RebateTransactionResponse
      */
-    private RebateTransactionResponse createRebateTransactions() throws ServiceException {
-        return rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList());
+    private RebateTransactionResponse createRebateTransactionsForAccountIdentifier() throws ServiceException {
+        return rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(getRebateTransactionRequestForAccountIdentifier()));
+    }
+
+    /**
+     * USE CASE 2: REBATE WITH DPAN
+     * It will create rebate transaction for DPAN into Mastercard Rewards Platform
+     *
+     * @return An instance of RebateTransactionResponse
+     */
+    private RebateTransactionResponse createRebateTransactionsForDPAN() throws ServiceException {
+        return rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(getRebateTransactionRequestForDPAN()));
     }
 
     /**
@@ -55,14 +70,11 @@ public class RebateTransactionExecutor {
      * Creation can fail for various reasons, this scenario is added so that you should know what to expect where there is a failure.
      */
     private void errorHandling() {
-        RebateTransactionRequest rebateTransactionRequest = RebateTransactionExample.getRebateTransactionRequest();
+        RebateTransactionRequest rebateTransactionRequest = getRebateTransactionRequestForAccountIdentifier();
         rebateTransactionRequest.setMerchantId(null);
 
-        RebateTransactionRequestList rebateTransactionList = new RebateTransactionRequestList();
-        rebateTransactionList.addRebateTransactionRequestListItem(rebateTransactionRequest);
-
         try {
-            rebateTransactionService.create(rebateTransactionList);
+            rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(rebateTransactionRequest));
         } catch (ServiceException e) {
             List<Error> errorList = e.getServiceErrors().getErrors().getError();
             Assertions.assertFalse(errorList.isEmpty());

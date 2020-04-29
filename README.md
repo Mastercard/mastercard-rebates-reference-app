@@ -85,7 +85,7 @@ See also:
                 <generateApiTests>false</generateApiTests>
                 <generateModelTests>false</generateModelTests>
                 <configOptions>
-                    <sourceFolder>src/gen/main/java</sourceFolder>
+                    <sourceFolder>src/gen/java/main</sourceFolder>
                     <dateLibrary>java8</dateLibrary>
                 </configOptions>
             </configuration>
@@ -117,15 +117,25 @@ When the project builds successfully you can then run the following command to s
 `java -jar target/mastercard-rebates-reference-1.0.0.jar`
 
 ## Use Cases <a name="use-cases"></a>
-> Case 1: **CREATE REBATE TRANSACTION**
-  - This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program.
+> Case 1: [REBATE WITH ACCOUNT IDENTIFIER](https://developer.mastercard.com/mastercard-rewards/documentation/use-cases/rebate-with-account-identifier/)
+  - This endpoint provides the capability to non PCI certified loyalty providers to offer rebates for all the rewards enrolled accounts mapped to Mastercard generated or client provided account identifiers.
+  - Here, the transactions performed by cardholder is scored by Loyalty providers for reward program enrolled accounts and as being the non PCI certified providers would send the transactions using account identifiers to Mastercard to award rebates.
   - Refer to model classes for field level information.
   
     | URL | Method | Request | Response |
     | :-- | :----- | :------ | :------- |
-    | `/rebate-transactions` | POST | [RebateTransactionRequestList](docs/RebateTransactionRequestList.md) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
+    | `/rebate-transactions` | POST | [RebateTransactionRequestList](docs/RebateTransactionRequestList.md#account-identifier) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
 
-> Case 2: **ERROR HANDLING**
+> Case 2: [REBATE WITH DPAN](https://developer.mastercard.com/mastercard-rewards/documentation/use-cases/rebate-with-dpan/)
+  - This endpoint provides the capability to loyalty providers to offer rebates for all the Mastercard accounts mapped to DPAN token irrespective of the accounts enrollment into rewards program.
+  - Here, the DPAN transactions performed by cardholder is scored by Loyalty providers and rebate processed by Mastercard.
+  - Refer to model classes for field level information.
+  
+    | URL | Method | Request | Response |
+    | :-- | :----- | :------ | :------- |
+    | `/rebate-transactions` | POST | [RebateTransactionRequestList](docs/RebateTransactionRequestList.md#dpan) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
+    
+> Case 3: [ERROR HANDLING](https://developer.mastercard.com/mastercard-rewards/documentation/api-reference/error-responses/)
   - The operation can fail for various reasons like formatting, field length exceeds, etc.
   - This use case just shows one of the example of such failures.
   - For the complete list of application specific error codes, refer to [Application Error Codes](https://developer.mastercard.com/mastercard-rebates/documentation/api-reference/application-error-codes/).

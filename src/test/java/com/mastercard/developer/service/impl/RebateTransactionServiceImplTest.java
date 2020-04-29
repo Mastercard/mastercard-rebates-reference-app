@@ -52,10 +52,25 @@ class RebateTransactionServiceImplTest {
     }
 
     @Test
-    void testCreate() throws Exception {
+    void testCreateRebateTransactionForAccountIdentifier() throws Exception {
         when(apiClient.execute(any(Call.class), any(Type.class))).thenReturn(new ApiResponse<>(201, new HashMap<>(), getRebateTransactionResponse()));
 
-        RebateTransactionResponse rebateTransactionResponse = rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList());
+        RebateTransactionResponse rebateTransactionResponse = rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(RebateTransactionExample.getRebateTransactionRequestForAccountIdentifier()));
+
+        verify(apiClient, atMostOnce()).buildCall(anyString(), anyString(), anyList(), anyList(), any(), anyMap(), anyMap(), anyMap(), any(), any());
+        verify(apiClient, atMostOnce()).execute(any(Call.class), any(Type.class));
+
+        assertAll(
+                () -> assertNotNull(rebateTransactionResponse),
+                () -> assertEquals("OK", rebateTransactionResponse.getStatus())
+        );
+    }
+
+    @Test
+    void testCreateRebateTransactionForDPAN() throws Exception {
+        when(apiClient.execute(any(Call.class), any(Type.class))).thenReturn(new ApiResponse<>(201, new HashMap<>(), getRebateTransactionResponse()));
+
+        RebateTransactionResponse rebateTransactionResponse = rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(RebateTransactionExample.getRebateTransactionRequestForDPAN()));
 
         verify(apiClient, atMostOnce()).buildCall(anyString(), anyString(), anyList(), anyList(), any(), anyMap(), anyMap(), anyMap(), any(), any());
         verify(apiClient, atMostOnce()).execute(any(Call.class), any(Type.class));
@@ -70,7 +85,7 @@ class RebateTransactionServiceImplTest {
     void testErrorResponse() throws Exception {
         when(apiClient.execute(any(Call.class), any(Type.class))).thenThrow(new ApiException(400, new HashMap<>(), getErrorResponseBody(INV_ACC_REASON_CODE, INV_ACC_DESCRIPTION, false)));
 
-        ServiceException serviceException = Assertions.assertThrows(ServiceException.class, () -> rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList()));
+        ServiceException serviceException = Assertions.assertThrows(ServiceException.class, () -> rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(RebateTransactionExample.getRebateTransactionRequestForDPAN())));
 
         verify(apiClient, atMostOnce()).buildCall(anyString(), anyString(), anyList(), anyList(), any(), anyMap(), anyMap(), anyMap(), any(), any());
         verify(apiClient, atMostOnce()).execute(any(Call.class), any(Type.class));
