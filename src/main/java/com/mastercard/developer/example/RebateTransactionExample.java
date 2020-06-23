@@ -33,7 +33,6 @@ public class RebateTransactionExample {
         RebateTransactionRequest rebateTransactionRequest = new RebateTransactionRequest();
         return rebateTransactionRequest.memberIca("47441")
                 .accountIdentifier("65203356")
-                .devicePrimaryAccountNumber("5100120000000004")
                 .merchantCategoryCode("6555")
                 .merchantId("6555")
                 .rebateAmount("50")
