@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  description: Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule and reward scoring. This API can be used by the client to handle exception cases with rebate processing or reward scoring. Set-up may be required on a separate reward module, please consult your Mastercard Loyalty Solutions Account Manager before using this API. This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN).
+  description: Mastercard Rebates services is a standalone API that provides clients with the capability of initiating statement credit to a Mastercard card account, independent of the promotion rule and reward scoring. This API can be used by the client to handle exception cases with rebate processing or reward scoring. Set-up may be required on a separate reward module, please consult your Mastercard Loyalty Solutions Account Manager before using this API. This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN) or primaryaccountnumber(PAN).
   version: "1.0"
   title: Mastercard Rebates API
   termsOfService: https://developer.mastercard.com/terms-of-use
@@ -21,7 +21,7 @@ paths:
     post:
       tags:
         - Rebate Transaction
-      summary: This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN).
+      summary: This endpoint enable clients with the ability to send rebate requests to Mastercard for processing for the accounts which may or may not be enrolled into rewards program. The parameters to specify the account for rebate processing can be one of different supported account identifiers or deviceprimaryaccountnumber(DPAN) or primaryaccountnumber(PAN).
       operationId: createRebateTransaction
       requestBody:
         content:
@@ -49,7 +49,7 @@ components:
     RebateTransactionRequestList:
       type: object
       properties:
-        rebateTransactionRequestList:
+        rebateTransactions:
           type: array
           items:
             $ref: "#/components/schemas/RebateTransactionRequest"
@@ -68,17 +68,22 @@ components:
       properties:
         accountIdentifier:
           type: string
-          example: "65203356"
+          example: "553400099004082664863069805555"
           maxLength: 30
-          description: An identifier that uniquely identifies the account enrolled into mastercard rewards. One of the supported account identifiers may be used. While using account identifier for processing, devicePrimaryAccountNumber is not required.
+          description: An identifier that uniquely identifies the account enrolled into mastercard rewards. One of the supported account identifiers may be used. While using account identifier for processing, devicePrimaryAccountNumber and primaryAccountNumber are not required.
         devicePrimaryAccountNumber:
           type: string
           example: ""
-          maxLength: 30
-          description: An unique identifier assigned to an account number used for rebate processing. The account number assigned to this identifier may or may not enrolled into mastecard rewards. While using devicePrimaryAccountNumber for processing, account identifier is not required.
+          maxLength: 19
+          description: An unique identifier assigned to an account number used for rebate processing. The account number assigned to this identifier may or may not enrolled into mastecard rewards. While using devicePrimaryAccountNumber for processing, account identifier and primaryAccountNumber are not required.
+        primaryAccountNumber:
+          type: string
+          example: ""
+          maxLength: 19
+          description: An unique identifier assigned to an account number used for rebate processing. The account number assigned to this identifier may or may not enrolled into mastecard rewards. While using primaryAccountNumber for processing, devicePrimaryAccountNumber and account identifier are not required.
         memberIca:
           type: string
-          example: "47441"
+          example: "9997"
           maxLength: 11
           description: Mastercard assigned unique identifier for a client.
         merchantCategoryCode:
@@ -93,6 +98,7 @@ components:
         rebateAmount:
           type: string
           example: "50"
+          maxLength: 4
           description: The value of the rebate requested to be processed for the specified account.
         rebateReversalIndicator:
           type: string
@@ -100,8 +106,8 @@ components:
           description: Indicates whether the transaction is credit or reversal of credit transaction. - Y means reversal and N means credit.
         rebateSourceCode:
           type: string
-          example: ext1
-          maxLength: "20"
+          example: rrt
+          maxLength: 20
           description: Unique identifier assigned by mastercard at the time of onboarding to capture processing information required for rebate settlement by clearing house.
         transactionAmount:
           type: string
@@ -115,8 +121,8 @@ components:
         transactionDescription:
           type: string
           example: Rebate
-          maxLength: "22"
-          description: This is the transaction description that will appear on a cardholder’s account statement.
+          maxLength: 22
+          description: This is the transaction description that will appear on a cardholder's  account statement.
         transactionSequenceNumber:
           type: string
           example: "11123"
@@ -157,11 +163,11 @@ components:
           description: Source of the error
         ReasonCode:
           type: string
-          example: "INVALID_FORMAT"
+          example: "INVALID_FIELD_FORMAT"
           description: A unique constant identifying the error case encountered during transaction processing.
         Description:
           type: string
-          example: "Member ICA should be numeric and less than or equal to 11 digit."
+          example: "Member ICA should be numeric."
           description: Short description of the ReasonCode field.
         Recoverable:
           type: boolean

@@ -83,6 +83,6 @@ public class RebateTransactionExample {
      */
     public static RebateTransactionRequestList getRebateTransactionRequestList(RebateTransactionRequest... rebateTransactionRequests) {
         RebateTransactionRequestList rebateTransactionList = new RebateTransactionRequestList();
-        return rebateTransactionList.rebateTransactionRequestList(Arrays.asList(rebateTransactionRequests));
+        return rebateTransactionList.rebateTransactions(Arrays.asList(rebateTransactionRequests));
     }
 }
