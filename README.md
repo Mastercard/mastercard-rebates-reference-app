@@ -135,8 +135,17 @@ When the project builds successfully you can then run the following command to s
     | URL | Method | Request | Response |
     | :-- | :----- | :------ | :------- |
     | `/rebate-transactions` | POST | [RebateTransactions](docs/RebateTransactions.md#dpan) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
-    
-> Case 3: [ERROR HANDLING](https://developer.mastercard.com/mastercard-rewards/documentation/api-reference/error-responses/)
+
+> Case 3: [REBATE WITH PAN](https://developer.mastercard.com/mastercard-rewards/documentation/use-cases/rebate-with-primary-account-number/)
+  - This endpoint provides the capability to loyalty providers to offer rebates for all the Mastercard accounts with PAN irrespective of the accounts enrollment into rewards program.
+  - Here, the PAN transactions performed by cardholder is scored by Loyalty providers and rebate processed by Mastercard.
+  - Refer to model classes for field level information.
+
+    | URL | Method | Request | Response |
+    | :-- | :----- | :------ | :------- |
+    | `/rebate-transactions` | POST | [RebateTransactions](docs/RebateTransactions.md#pan) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
+
+> Case 4: [ERROR HANDLING](https://developer.mastercard.com/mastercard-rewards/documentation/api-reference/error-responses/)
   - The operation can fail for various reasons like formatting, field length exceeds, etc.
   - This use case just shows one of the example of such failures.
   - For the complete list of application specific error codes, refer to [Application Error Codes](https://developer.mastercard.com/mastercard-rebates/documentation/api-reference/application-error-codes/).

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.mastercard.developer.example.RebateTransactionExample.getRebateTransactionRequestForAccountIdentifier;
 import static com.mastercard.developer.example.RebateTransactionExample.getRebateTransactionRequestForDPAN;
+import static com.mastercard.developer.example.RebateTransactionExample.getRebateTransactionRequestForPAN;
 
 /**
  * This is demo executor class to represent how the Rebate Transaction operations can be perform.
@@ -83,5 +84,15 @@ public class RebateTransactionExecutor {
                 log.error("Failed to create Rebate Transaction in Error Handling Scenario - {}", error.getDescription());
             });
         }
+    }
+
+    /**
+     * USE CASE 3: REBATE WITH PAN
+     * It will create rebate transaction for PAN into Mastercard Rewards Platform
+     *
+     * @return An instance of RebateTransactionResponse
+     */
+    private RebateTransactionResponse createRebateTransactionsForPAN() throws ServiceException {
+        return rebateTransactionService.create(RebateTransactionExample.getRebateTransactionRequestList(getRebateTransactionRequestForPAN()));
     }
 }

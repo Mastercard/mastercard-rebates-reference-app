@@ -49,3 +49,24 @@
   ]
 }
 ```
+
+### Rebate with PAN <a name="pan"></a>
+```json
+{
+  "rebateTransactions": [
+    {
+      "primaryAccountNumber": "5555555555555555555",
+      "memberIca": "47441",
+      "merchantCategoryCode": "6555",
+      "merchantId": "6555",
+      "rebateAmount": "50",
+      "rebateReversalIndicator": "N",
+      "rebateSourceCode": "ext1",
+      "transactionAmount": "100",
+      "transactionDate": "2019-08-01",
+      "transactionDescription": "Rebate",
+      "transactionSequenceNumber": "11123"
+    }
+  ]
+}
+```
