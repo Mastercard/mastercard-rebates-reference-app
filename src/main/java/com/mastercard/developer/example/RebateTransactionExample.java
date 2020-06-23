@@ -3,7 +3,7 @@ package com.mastercard.developer.example;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.openapitools.client.model.RebateTransactionRequest;
-import org.openapitools.client.model.RebateTransactionRequestList;
+import org.openapitools.client.model.RebateTransactions;
 
 import java.util.Arrays;
 
@@ -77,12 +77,12 @@ public class RebateTransactionExample {
     }
 
     /**
-     * Create an instance of RebateTransactionRequestList. Pass list of RebateTransactionRequest object
+     * Create an instance of RebateTransactions. Pass list of RebateTransactionRequest object
      *
-     * @return An instance of RebateTransactionRequestList
+     * @return An instance of RebateTransactions
      */
-    public static RebateTransactionRequestList getRebateTransactionRequestList(RebateTransactionRequest... rebateTransactionRequests) {
-        RebateTransactionRequestList rebateTransactionList = new RebateTransactionRequestList();
+    public static RebateTransactions getRebateTransactionRequestList(RebateTransactionRequest... rebateTransactionRequests) {
+        RebateTransactions rebateTransactionList = new RebateTransactions();
         return rebateTransactionList.rebateTransactions(Arrays.asList(rebateTransactionRequests));
     }
 }

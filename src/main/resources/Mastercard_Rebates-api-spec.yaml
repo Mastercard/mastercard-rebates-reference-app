@@ -27,8 +27,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RebateTransactionRequestList"
-        description: rebateTransactionRequestList
+              $ref: "#/components/schemas/RebateTransactions"
+        description: RebateTransactions
         required: true
       responses:
         "201":
@@ -46,14 +46,14 @@ paths:
       deprecated: false
 components:
   schemas:
-    RebateTransactionRequestList:
+    RebateTransactions:
       type: object
       properties:
         rebateTransactions:
           type: array
           items:
             $ref: "#/components/schemas/RebateTransactionRequest"
-      title: RebateTransactionRequestList
+      title: RebateTransactions
     RebateTransactionRequest:
       type: object
       required:

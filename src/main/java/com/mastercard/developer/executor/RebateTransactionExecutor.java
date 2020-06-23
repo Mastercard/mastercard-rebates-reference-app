@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.openapitools.client.model.Error;
 import org.openapitools.client.model.RebateTransactionRequest;
-import org.openapitools.client.model.RebateTransactionRequestList;
 import org.openapitools.client.model.RebateTransactionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

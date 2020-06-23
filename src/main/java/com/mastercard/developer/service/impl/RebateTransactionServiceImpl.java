@@ -9,8 +9,8 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.JSON;
 import org.openapitools.client.api.RebateTransactionApi;
 import org.openapitools.client.model.Errors;
-import org.openapitools.client.model.RebateTransactionRequestList;
 import org.openapitools.client.model.RebateTransactionResponse;
+import org.openapitools.client.model.RebateTransactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class RebateTransactionServiceImpl implements RebateTransactionService {
      * @throws ServiceException If error occurred while calling rebate transaction create endpoint
      */
     @Override
-    public RebateTransactionResponse create(RebateTransactionRequestList rebateTransactionRequestList) throws ServiceException {
+    public RebateTransactionResponse create(RebateTransactions rebateTransactionRequestList) throws ServiceException {
         try {
             log.info("<-- CALLING REBATE TRANSACTION CREATE ENDPOINT -->");
             RebateTransactionResponse rebateTransactionResponse = rebateTransactionApi.createRebateTransaction(rebateTransactionRequestList);
