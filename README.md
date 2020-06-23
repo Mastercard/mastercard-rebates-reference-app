@@ -102,6 +102,7 @@ Now that you have all the dependencies you need, you can generate the sources. T
   In IntelliJ IDEA, open the Maven window **(View > Tool Windows > Maven)**. Click the icons `Reimport All Maven Projects` and `Generate Sources and Update Folders for All Projects`
 
 * **Method 2**<br/>
+
   In the same menu, navigate to the commands **({Project name} > Lifecycle)**, select `clean` and `compile` then click the icon `Run Maven Build`. 
 
 `Using Terminal`
@@ -124,7 +125,7 @@ When the project builds successfully you can then run the following command to s
   
     | URL | Method | Request | Response |
     | :-- | :----- | :------ | :------- |
-    | `/rebate-transactions` | POST | [RebateTransactionRequestList](docs/RebateTransactionRequestList.md#account-identifier) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
+    | `/rebate-transactions` | POST | [RebateTransactions](docs/RebateTransactions.md#account-identifier) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
 
 > Case 2: [REBATE WITH DPAN](https://developer.mastercard.com/mastercard-rewards/documentation/use-cases/rebate-with-dpan/)
   - This endpoint provides the capability to loyalty providers to offer rebates for all the Mastercard accounts mapped to DPAN token irrespective of the accounts enrollment into rewards program.
@@ -133,7 +134,7 @@ When the project builds successfully you can then run the following command to s
   
     | URL | Method | Request | Response |
     | :-- | :----- | :------ | :------- |
-    | `/rebate-transactions` | POST | [RebateTransactionRequestList](docs/RebateTransactionRequestList.md#dpan) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
+    | `/rebate-transactions` | POST | [RebateTransactions](docs/RebateTransactions.md#dpan) | [RebateTransactionResponse](docs/RebateTransactionResponse.md) |
     
 > Case 3: [ERROR HANDLING](https://developer.mastercard.com/mastercard-rewards/documentation/api-reference/error-responses/)
   - The operation can fail for various reasons like formatting, field length exceeds, etc.

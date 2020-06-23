@@ -1,17 +1,17 @@
-# RebateTransactionRequestList
+# RebateTransactions
 
 ## Properties <a name="properties"></a>
 
 | Name | Type | Max Length | Description | Notes |
 | :--- | :--- | :--------- | :---------- | :---- |
-| **rebateTransactionRequestList** | [**List&lt;RebateTransactionRequest&gt;**](RebateTransactionRequest.md) | | | [optional] |
+| **rebateTransactions** | [**List&lt;RebateTransactionRequest&gt;**](RebateTransactionRequest.md) | | | [optional] |
 
 ## Sample JSON
 
 ### Rebate with Account Identifier <a name="account-identifier"></a>
 ```json
 {
-  "rebateTransactionRequestList": [
+  "rebateTransactions": [
     {
       "accountIdentifier": "65203356",
       "memberIca": "47441",
@@ -32,7 +32,7 @@
 ### Rebate with DPAN <a name="dpan"></a>
 ```json
 {
-  "rebateTransactionRequestList": [
+  "rebateTransactions": [
     {
       "devicePrimaryAccountNumber": "5100120000000004",
       "memberIca": "47441",
